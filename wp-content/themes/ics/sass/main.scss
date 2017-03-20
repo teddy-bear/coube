@@ -26,54 +26,6 @@
 
 /* Row with house icon on the home page.
 ------------------------------------------------------------ */
-.row-featured-image {
-  overflow: hidden;
-  height: 300px;
-  .container {
-    position: relative;
-    height: 100%;
-  }
-  .block-text {
-    @include font(30px, 1.33, $blue, 300);
-    font-style: italic;
-    padding-top: 70px;
-    float: left;
-    width: 55%;
-  }
-  .block-image {
-    overflow: hidden;
-    background: url("../images/office-image.png") no-repeat 0 100%;
-    height: 100%;
-    .text {
-      position: absolute;
-      background: url(../images/cost-effective-line.svg) 0 0/contain no-repeat;
-      width: 340px;
-      height: 90px;
-      top: 127px;
-      right: 60px;
-      padding: 0 0 0 160px;
-      font-size: 16px;
-      @include break($large) {
-        right: 0;
-      }
-      @include break($medium) {
-        width: 260px;
-        right: -20px;
-        padding: 0 0 0 110px;
-        font-size: 14px;
-      }
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-
-      }
-    }
-  }
-}
-
-/* Row with house icon on the home page.
------------------------------------------------------------- */
 .parallax-blue {
   height: 488px;
   .container, .row {
