@@ -1,0 +1,137 @@
+/* -------------------------------------------------------------------------------------------------------------------
+                                                  Footer
+------------------------------------------------------------------------------------------------------------------- */
+.site-footer {
+  .row-footer-blocks {
+    border-top: 10px solid #f1f1f1;
+    padding: 70px 0 60px;
+    @include clearfix();
+    @include break($neutral) {
+    }
+    @include break($mobile) {
+      padding: 20px 0;
+    }
+    .home & {
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .footer-blocks {
+      overflow: hidden;
+      .widget-title {
+        @include font(16px, 1.5, $grey, 400);
+        margin-bottom: 5px;
+      }
+
+      // Common rules for widgets.
+      > div {
+      }
+
+      p {
+        padding: 0;
+      }
+
+      .widget.logo {
+        img {
+          max-width: 226px;
+        }
+      }
+
+      // Phone & mail.
+      .contact-details {
+        a.phone-number {
+          font-size: 25px;
+          color: $grey;
+          font-weight: 700;
+          @include break($neutral) {
+            font-size: 16px;
+          }
+        }
+        a.email {
+          font-size: 16px;
+          color: $blue;
+          @include break($neutral) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      // Address.
+      .address {
+        span {
+          display: inline-block;
+          width: 180px;
+          color: $grey;
+          font-weight: 600;
+        }
+      }
+
+      // Social icons widget.
+      .social-icons {
+
+      }
+
+      .phone {
+        .phone-number {
+          @include font(24px, 1, $brown, 700);
+          letter-spacing: 0.7px;
+        }
+      }
+
+    }
+
+  }
+
+  .row-copyright {
+    @include font(14px, 1.1, $grey);
+    letter-spacing: 0.4px;
+    padding: 15px 0;
+    background: #f2f2f2;
+    @include clearfix();
+    @include break($neutral) {
+    }
+
+    p {
+      padding: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .copyright {
+      float: left;
+      @include break($neutral) {
+      }
+    }
+    .privacy {
+      float: right;
+      // Separator line between copy and privacy.
+      /*position: relative;
+      margin-left: 20px;
+      padding-left: 20px;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        background: #fff;
+        height: 100%;
+      }*/
+      @include break($neutral) {
+        /*float: none;
+        width: 100%;
+        text-align: center;*/
+      }
+    }
+  }
+
+}

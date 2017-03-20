@@ -1,0 +1,234 @@
+/* -------------------------------------------------------------------------------------------------------------------
+                                                  Header elements
+------------------------------------------------------------------------------------------------------------------- */
+.site-header {
+  position: relative;
+  .container {
+    position: relative;
+  }
+
+  p {
+    padding: 0;
+  }
+
+  .row-top {
+    height: 110px;
+    @include clearfix();
+    @include break($neutral) {
+    }
+    @include break($mobile) {
+      padding-top: 40px;
+    }
+  }
+
+  .site-logo {
+    float: left;
+    padding: 11px 0 0 0;
+    position: relative;
+    z-index: 3;
+    @include break($large) {
+    }
+    @include break($medium) {
+      width: 210px;
+    }
+    @include break($neutral) {
+    }
+    @include break($mobile) {
+      float: none;
+    }
+    a {
+      text-decoration: none;
+      &:hover {
+
+      }
+    }
+    img {
+      display: block;
+    }
+  }
+}
+
+/* Primary menu.
+------------------------------------------------------------ */
+.header-menu {
+  position: relative;
+  z-index: 3;
+  float: right;
+  @include break($large) {
+  }
+  @include break($neutral) {
+  }
+  // Common styles.
+  .main-menu {
+    li {
+      display: block;
+      z-index: 2;
+      position: relative;
+      a {
+        text-decoration: none;
+        position: relative;
+        display: block;
+      }
+      span {
+        display: block;
+        position: relative;
+      }
+    }
+    // 1st level menus.
+    > li {
+      float: left;
+      margin: 0 5px;
+      height: 110px;
+      @include break($neutral) {
+      }
+      > a {
+        @include font(16px, 40px, $blue, 600);
+        padding: 0 15px;
+        transition: .3s;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+        margin-top: 34px;
+        @include break($large) {
+          font-size: 15px;
+        }
+        @include break($medium) {
+          font-size: 14px;
+        }
+        @include break($neutral) {
+          padding: 0 10px;
+        }
+        // Menu link decor.
+        span {
+          position: relative;
+          display: block;
+          /*&::before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #a7e45d;
+            transition: all .3s linear 0s;
+          }*/
+        }
+        // Parent menu item.
+        &.sf-with-ul {
+          // Bottom arrow.
+          // Menu link arrow decor.
+          /*&::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -2px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px 4px 0 4px;
+            border-color: #ca9d9d transparent transparent transparent;
+          }*/
+        }
+        // Hover root item.
+        &:hover,
+        &:focus {
+          background: $blue;
+          color: #fff;
+          span::before {
+            //width: 100%;
+          }
+          &::after {
+          }
+        }
+      }
+
+      // Parent root menu item.
+      &.menu-item-has-children {
+        // Keep activity for the root item while viewing dropdown.
+        &.sfHover > a {
+          background: $blue;
+          color: #fff;
+          span::before {
+            //width: 100%;
+          }
+          &::after {
+            //background: url("../images/menu-arrow-hover.png");
+          }
+        }
+      }
+
+      // Active root menu item.
+      &.current_page_item,
+      &.current-menu-item,
+      &.current-page-ancestor,
+      &.current-menu-ancestor {
+        > a {
+          border-color: #b8cee4;
+          span::before {
+            //width: 100%;
+          }
+          &::after {
+            //background: url("../images/menu-arrow-hover.png");
+          }
+        }
+      }
+
+      // Animate dropdown menu.
+      &.sfHover,
+      &:hover {
+        > ul.sub-menu {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      // 2nd Level.
+      > ul.sub-menu {
+        background: #e6e6e6;
+        background: linear-gradient(to bottom, #e6e6e6, #f6f6f6);
+        border-top: 4px solid #b8cee4;
+        padding: 12px 25px;
+        display: none;
+        position: absolute;
+        top: 110px;
+        left: 0;
+        z-index: 10;
+        width: 230px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .4s ease-out;
+        transform: translateY(30px);
+        @include break($medium) {
+        }
+        > li {
+          border-top: 1px solid #d8d8d8;;
+          &:first-child {
+            border-top: none;
+          }
+          // Current sub menu item.
+          &.current_page_item > a,
+          &.current-menu-ancestor > a,
+          &.current-menu-item > a {
+            color: #0f4675;
+          }
+          > a {
+            @include font(14px, 16px, $blue);
+            padding: 7px 0;
+            @include break($medium) {
+            }
+            @include break($neutral) {
+            }
+            // Hover sub menu item.
+            &:hover {
+              color: #0f4675;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
