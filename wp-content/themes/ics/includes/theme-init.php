@@ -149,7 +149,7 @@ function post_type_house_plans() {
 }
 
 /* Services */
-//add_action( 'init', 'post_type_services' );
+add_action( 'init', 'post_type_services' );
 function post_type_services() {
 	$labels = array(
 		'name'               => _x( 'Services', 'post type general name', '' ),
@@ -249,7 +249,7 @@ function post_type_video() {
 }
 
 /* News */
-//add_action( 'init', 'post_type_news' );
+add_action( 'init', 'post_type_news' );
 function post_type_news() {
 	$labels = array(
 		'name'               => _x( 'News', 'post type general name', '' ),
@@ -281,6 +281,32 @@ function post_type_news() {
 				'excerpt',
 				'thumbnail'
 			)
+		)
+	);
+	$taxonomy_labels = array(
+		'name'                       => _x( 'News categories', 'taxonomy general name' ),
+		'singular_name'              => _x( 'Category', 'taxonomy singular name' ),
+		'search_items'               => __( 'Search Categories' ),
+		'popular_items'              => __( 'Popular Categories' ),
+		'all_items'                  => __( 'All Categories' ),
+		'parent_item'                => NULL,
+		'parent_item_colon'          => NULL,
+		'edit_item'                  => __( 'Edit Category' ),
+		'update_item'                => __( 'Update Category' ),
+		'add_new_item'               => __( 'Add New Category' ),
+		'new_item_name'              => __( 'New Category Name' ),
+		'separate_items_with_commas' => __( 'Separate categories with commas' ),
+		'add_or_remove_items'        => __( 'Add or remove categories' ),
+		'choose_from_most_used'      => __( 'Choose from the most used categories' ),
+		'not_found'                  => __( 'No categories found.' ),
+		'menu_name'                  => __( 'Services Categories' ),
+	);
+	register_taxonomy(
+		'news_category',
+		'news',
+		array(
+			'hierarchical' => FALSE,
+			'labels'       => $taxonomy_labels
 		)
 	);
 }
@@ -358,14 +384,14 @@ function post_type_testimonials() {
 	);
 }
 
-/* Network logotypes */
-//add_action( 'init', 'post_type_network_logo' );
-function post_type_network_logo() {
+/* Referenzliste */
+add_action( 'init', 'post_type_referenzliste' );
+function post_type_referenzliste() {
 	$labels = array(
-		'name'               => _x( 'Logotypes', 'post type general name' ),
-		'singular_name'      => _x( 'Logo', 'post type singular name' ),
-		'menu_name'          => _x( 'Logos', 'admin menu' ),
-		'name_admin_bar'     => _x( 'Logo', 'add new on admin bar' ),
+		'name'               => _x( 'Referenzliste', 'post type general name' ),
+		'singular_name'      => _x( 'Referenzliste', 'post type singular name' ),
+		'menu_name'          => _x( 'Referenzlisten', 'admin menu' ),
+		'name_admin_bar'     => _x( 'Referenzliste', 'add new on admin bar' ),
 		'add_new'            => __( 'Add New item' ),
 		'add_new_item'       => __( 'Add New item' ),
 		'new_item'           => __( 'New item' ),
@@ -373,19 +399,21 @@ function post_type_network_logo() {
 		'view_item'          => __( 'View item' ),
 		'all_items'          => __( 'All items' ),
 		'search_items'       => __( 'Search items' ),
-		'parent_item_colon'  => __( 'Parent Logos:' ),
-		'not_found'          => __( 'No Logos found.' ),
-		'not_found_in_trash' => __( 'No Logos found in Trash.' )
+		'parent_item_colon'  => __( 'Parent Referenzlisten:' ),
+		'not_found'          => __( 'No Referenzlisten found.' ),
+		'not_found_in_trash' => __( 'No Referenzlisten found in Trash.' )
 	);
-	register_post_type( 'network_logo',
+	register_post_type( 'referenzliste',
 		array(
 			'labels'            => $labels,
 			'public'            => true,
 			'show_in_nav_menus' => false,
 			'menu_position'     => 8,
 			'menu_icon'         => 'dashicons-images-alt2',
-			'supports'          => array(
+			'supports'            => array(
 				'title',
+				'editor',
+				'excerpt',
 				'thumbnail'
 			)
 		)

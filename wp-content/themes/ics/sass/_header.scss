@@ -3,6 +3,7 @@
 ------------------------------------------------------------------------------------------------------------------- */
 .site-header {
   position: relative;
+  background: #fff;
   .container {
     position: relative;
   }
@@ -12,29 +13,23 @@
   }
 
   .row-top {
-    height: 110px;
     @include clearfix();
     @include break($neutral) {
     }
     @include break($mobile) {
-      padding-top: 40px;
     }
   }
 
   .site-logo {
-    float: left;
-    padding: 11px 0 0 0;
-    position: relative;
-    z-index: 3;
+    text-align: center;
+    padding: 20px 0;
     @include break($large) {
     }
     @include break($medium) {
-      width: 210px;
     }
     @include break($neutral) {
     }
     @include break($mobile) {
-      float: none;
     }
     a {
       text-decoration: none;
@@ -43,7 +38,49 @@
       }
     }
     img {
+      //display: block;
+    }
+  }
+
+  .contact-details {
+    position: absolute;
+    left: 45px;
+    top: 20px;
+    a {
       display: block;
+      margin-bottom: 10px;
+      position: relative;
+      color: $blue;
+      &.phone-number {
+        letter-spacing: 1px;
+        &::before {
+          content: "\f10b"; // phone.
+          font-family: $font_awesome;
+          font-size: 30px;
+          position: absolute;
+          top: -10px;
+          left: -25px;
+        }
+      }
+      &.email {
+        &::before {
+          content: "\f0e0"; // envelope.
+          font-family: $font_awesome;
+          font-size: 20px;
+          position: absolute;
+          top: -3px;
+          left: -30px;
+        }
+      }
+    }
+  }
+  .social-links {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    a {
+      display: inline-block;
+      margin-left: 5px;
     }
   }
 }
@@ -53,7 +90,9 @@
 .header-menu {
   position: relative;
   z-index: 3;
-  float: right;
+  border-top: 1px solid $blue;
+  padding: 20px 0;
+  text-align: center;
   @include break($large) {
   }
   @include break($neutral) {
@@ -76,23 +115,34 @@
     }
     // 1st level menus.
     > li {
-      float: left;
-      margin: 0 5px;
-      height: 110px;
+      display: inline-block;
+      margin: 0 10px;
+      // items separator.
+      &::before {
+        content: '';
+        display: block;
+        height: 20px;
+        width: 1px;
+        background: $blue;
+        position: absolute;
+        top: 5px;
+        left: -10px;
+      }
+      &:first-child::before {
+        display: none;
+      }
       @include break($neutral) {
       }
       > a {
-        @include font(16px, 40px, $blue, 600);
-        padding: 0 15px;
+        @include font(14px, 28px, $blue, 600);
+        padding: 0 10px;
         transition: .3s;
         text-transform: uppercase;
-        border: 1px solid transparent;
-        margin-top: 34px;
         @include break($large) {
-          font-size: 15px;
+
         }
         @include break($medium) {
-          font-size: 14px;
+
         }
         @include break($neutral) {
           padding: 0 10px;
@@ -115,21 +165,18 @@
         }
         // Parent menu item.
         &.sf-with-ul {
+          padding-right: 30px;
           // Bottom arrow.
           // Menu link arrow decor.
-          /*&::after {
-            content: '';
+          &::after {
+            content: "\f105"; // angle right.
+            font-family: $font_awesome;
             display: block;
             position: absolute;
-            top: 50%;
-            margin-top: -2px;
+            top: 0;
             right: 10px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 5px 4px 0 4px;
-            border-color: #ca9d9d transparent transparent transparent;
-          }*/
+            font-size: 15px;
+          }
         }
         // Hover root item.
         &:hover,
@@ -154,7 +201,7 @@
             //width: 100%;
           }
           &::after {
-            //background: url("../images/menu-arrow-hover.png");
+            content: "\f107"; // angle down.
           }
         }
       }
@@ -165,12 +212,13 @@
       &.current-page-ancestor,
       &.current-menu-ancestor {
         > a {
-          border-color: #b8cee4;
+          background: $blue;
+          color: #fff;
           span::before {
             //width: 100%;
           }
           &::after {
-            //background: url("../images/menu-arrow-hover.png");
+            //content: "\f107"; // angle down.
           }
         }
       }
@@ -187,43 +235,45 @@
 
       // 2nd Level.
       > ul.sub-menu {
-        background: #e6e6e6;
-        background: linear-gradient(to bottom, #e6e6e6, #f6f6f6);
-        border-top: 4px solid #b8cee4;
-        padding: 12px 25px;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 15px 12px;
         display: none;
         position: absolute;
-        top: 110px;
+        top: 32px;
         left: 0;
         z-index: 10;
-        width: 230px;
+        width: 200px;
         opacity: 0;
         visibility: hidden;
         transition: all .4s ease-out;
         transform: translateY(30px);
+        text-align: left;
         @include break($medium) {
         }
         > li {
-          border-top: 1px solid #d8d8d8;;
+          /*border-top: 1px solid #d8d8d8;;
           &:first-child {
             border-top: none;
-          }
+          }*/
           // Current sub menu item.
           &.current_page_item > a,
           &.current-menu-ancestor > a,
           &.current-menu-item > a {
-            color: #0f4675;
+            color: $blue;
           }
           > a {
-            @include font(14px, 16px, $blue);
-            padding: 7px 0;
+            font-size: 14px;
+            color: #888;
+            padding: 3px 0;
             @include break($medium) {
             }
             @include break($neutral) {
             }
             // Hover sub menu item.
             &:hover {
-              color: #0f4675;
+              color: $blue;
+              text-decoration: underline;
             }
           }
         }

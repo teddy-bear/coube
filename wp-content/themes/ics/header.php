@@ -32,6 +32,11 @@
             <div class="row-top">
                 <div class="container">
 					<?php get_template_part( 'template-parts/site-logo' ); ?>
+                    <div class="contact-details">
+						<?php echo do_shortcode( '[phone-number ]' ); ?>
+						<?php echo do_shortcode( '[email]' ); ?>
+                    </div>
+					<?php echo show_text_block( 'social-links' ); ?>
                     <!--Primary menu-->
                     <div class="header-menu">
                         <nav id="menu_mobile" class="nav-primary">

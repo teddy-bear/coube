@@ -107,7 +107,7 @@ function theme_scripts() {
 	wp_enqueue_script( 'parallax', $scripts_path . 'libs/jquery.parallax.min.js', array( 'jquery' ), '', true );
 
 	// Cookies.
-	wp_enqueue_script( 'cookies', $scripts_path . 'libs/cookie.min.js', array( 'jquery' ), '', true );
+	//wp_enqueue_script( 'cookies', $scripts_path . 'libs/cookie.min.js', array( 'jquery' ), '', true );
 
 	// Mobile menu.
 	//wp_enqueue_script( 'mmenu', $scripts_path . 'libs/jquery.mmenu.min.all.js', array( 'jquery' ), '4.7.4', true );

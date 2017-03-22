@@ -28,7 +28,7 @@ function theme_customize_register( $wp_customize ) {
 		'priority' => 1
 	) ) );
 
-	/*
+
 
 	// Logo footer image.
 	$wp_customize->add_setting( 'logo_secondary', array(
@@ -41,7 +41,7 @@ function theme_customize_register( $wp_customize ) {
 		'section'  => 'custom_settings',
 		'settings' => 'logo_secondary',
 		'priority' => 2
-	) ) );*/
+	) ) );
 
 	// Custom link text.
 	$wp_customize->add_setting( 'custom_link_text', array(

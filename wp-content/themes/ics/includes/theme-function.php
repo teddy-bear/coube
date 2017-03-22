@@ -193,15 +193,15 @@ function custom_login_logo() { ?>
             background: url(<?php echo get_stylesheet_directory_uri(); ?>/images/logo.png) no-repeat 50% 0 / contain;
             padding: 0;
             width: 320px;
-            height: 30px;
+            height: 80px;
             font-size: 24px;
             text-indent: 0;
             color: #fff;
         }
 
         #loginform {
-            background: #4e8c12;
-            background: linear-gradient(-180deg, #069004, #0b4e05);
+            /*background: #4e8c12;
+            background: linear-gradient(-180deg, #069004, #0b4e05);*/
         }
 
         #loginform label {

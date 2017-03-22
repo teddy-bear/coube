@@ -8,12 +8,12 @@
 body {
   font-family: $open_sans;
   @include font();
-  background: #fff;
+  background: #f2f2f2;
   @include break($large) {
-    font-size: 17px;
+
   }
   @include break($medium) {
-    font-size: 16px;
+    font-size: 15px;
   }
   @include break($mobile) {
     font-size: 15px;
@@ -199,7 +199,6 @@ ul.list {
   li {
     padding: 0 0 10px 32px;
     position: relative;
-    //background: url("../images/check-simple-line-icons-copy.svg") no-repeat;
     background: url("../images/icon-list.png") no-repeat 0 4px;
     ul {
       margin: 15px 0 0 0;
@@ -365,6 +364,39 @@ img.border {
 
 /* Titles
 ------------------------------------------------------------ */
+.title-text {
+  @include font(40px, 1.5, $blue, 300);
+  display: inline-block;
+  position: relative;
+  padding: 0 10px;
+  margin-bottom: .5em;
+  strong {
+    color: $orange;
+  }
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    left: 0;
+    border-top: 1px solid $blue;
+    border-left: 1px solid $blue;
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 5px;
+    right: 0;
+    border-bottom: 1px solid $orange;
+    border-right: 1px solid $orange;
+  }
+}
+
 h1 {
   @include font(40px, 1.2, #616365, 700);
   margin-bottom: .5em;

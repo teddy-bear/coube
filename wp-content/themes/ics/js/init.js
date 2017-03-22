@@ -39,27 +39,6 @@
 
     preventMenuAction();
 
-    // Parallax effect for header image and text on the home page.
-    function scrollBanner() {
-        $(window).scroll(function () {
-            var scrollPos = $(this).scrollTop();
-            //console.log(scrollPos);
-            $('.row-parallax-top .block').css({
-                'top': (scrollPos / 2) + 'px',
-                'opacity': 1 - (scrollPos / 600)
-            });
-            $('.row-parallax-top').css({
-                'background-position': 'center ' + (-scrollPos / 9) + 'px'
-            });
-            $('.row-parallax-top .wrapper').css({
-                'background-position': '90% ' + (220 + scrollPos / 5) + 'px'
-                //'bottom': (-scrollPos / 4) + 'px'
-            });
-        });
-    }
-
-    //scrollBanner();
-
     /**
      * Disable auto scroll for location map.
      */
@@ -139,9 +118,6 @@
             }
         });
 
-        // Mobile slider touch icon.
-        $('.flexslider').append('<div class="touch-indicator visible-xs"></div>');
-
         /* ================= Initialize external plugins  ================ */
 
         // Images gallery.
@@ -154,8 +130,18 @@
         });
 
         // Testimonials carousel.
-        $('.home .testimonials-items').owlCarousel({
-            items: 1,
+        $('.home .logo-items').owlCarousel({
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 2
+                },
+                768: {
+                    items: 3
+                }
+            },
             lazyLoad: true,
             dots: true,
             nav: true,
@@ -165,7 +151,7 @@
             autoplayHoverPause: false,
             loop: true,
             //stagePadding: 30,
-            smartSpeed: 450
+            //smartSpeed: 450
             //animateIn: 'slideInUp',
             //animateOut: 'slideInDown'
         });

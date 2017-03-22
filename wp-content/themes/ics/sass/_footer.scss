@@ -2,14 +2,15 @@
                                                   Footer
 ------------------------------------------------------------------------------------------------------------------- */
 .site-footer {
+  background: #051121;
+  padding: 15px 0;
+  color: #dbdbdb;
+  font-size: 13px;
   .row-footer-blocks {
-    border-top: 10px solid #f1f1f1;
-    padding: 70px 0 60px;
     @include clearfix();
     @include break($neutral) {
     }
     @include break($mobile) {
-      padding: 20px 0;
     }
     .home & {
     }
@@ -21,8 +22,6 @@
     .footer-blocks {
       overflow: hidden;
       .widget-title {
-        @include font(16px, 1.5, $grey, 400);
-        margin-bottom: 5px;
       }
 
       // Common rules for widgets.
@@ -33,63 +32,60 @@
         padding: 0;
       }
 
-      .widget.logo {
-        img {
-          max-width: 226px;
-        }
+      .site-logo {
+        float: left;
       }
 
       // Phone & mail.
       .contact-details {
-        a.phone-number {
-          font-size: 25px;
-          color: $grey;
-          font-weight: 700;
-          @include break($neutral) {
-            font-size: 16px;
-          }
+        float: right;
+        text-align: right;
+        p {
+          padding-bottom: 7px;
         }
-        a.email {
-          font-size: 16px;
-          color: $blue;
-          @include break($neutral) {
-            font-size: 14px;
-          }
-        }
-      }
-
-      // Address.
-      .address {
-        span {
+        a {
+          font-size: 14px;
+          color: #fff;
+          position: relative;
+          text-decoration: none;
           display: inline-block;
-          width: 180px;
-          color: $grey;
-          font-weight: 600;
+          &.phone-number {
+            letter-spacing: 1px;
+            &::before {
+              content: "\f10b"; // phone.
+              font-family: $font_awesome;
+              font-size: 30px;
+              position: absolute;
+              top: -10px;
+              left: -25px;
+            }
+          }
+          &.email {
+            text-decoration: underline;
+            &::before {
+              content: "\f0e0"; // envelope.
+              font-family: $font_awesome;
+              font-size: 20px;
+              position: absolute;
+              top: -5px;
+              left: -30px;
+            }
+          }
+        }
+        // Social icons block.
+        .social-icons {
+          a {
+            display: inline-block;
+            margin-left: 5px;
+          }
         }
       }
-
-      // Social icons widget.
-      .social-icons {
-
-      }
-
-      .phone {
-        .phone-number {
-          @include font(24px, 1, $brown, 700);
-          letter-spacing: 0.7px;
-        }
-      }
-
     }
-
   }
 
   .row-copyright {
-    @include font(14px, 1.1, $grey);
-    letter-spacing: 0.4px;
-    padding: 15px 0;
-    background: #f2f2f2;
     @include clearfix();
+    text-align: center;
     @include break($neutral) {
     }
 
@@ -101,35 +97,41 @@
       color: inherit;
       text-decoration: none;
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
     }
 
     .copyright {
-      float: left;
+      display: inline-block;
       @include break($neutral) {
       }
     }
-    .privacy {
-      float: right;
-      // Separator line between copy and privacy.
-      /*position: relative;
-      margin-left: 20px;
+    .footer-menu {
+      display: inline-block;
       padding-left: 20px;
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        background: #fff;
-        height: 100%;
-      }*/
+      li {
+        display: inline-block;
+        // Separator line.
+        position: relative;
+        padding: 0 6px 0 8px;
+        &::before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 4px;
+          bottom: 4px;
+          left: 0;
+          width: 1px;
+          background: #fff;
+        }
+        &:first-child {
+          &::before {
+            display: none;
+          }
+        }
+      }
       @include break($neutral) {
-        /*float: none;
-        width: 100%;
-        text-align: center;*/
+
       }
     }
   }

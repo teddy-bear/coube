@@ -3,8 +3,6 @@
 $open_sans: 'Open Sans', sans-serif;
 
 $font_awesome: FontAwesome;
-$font_woocommerce: 'WooCommerce';
-//$material_icons: 'Material Icons';
 
 // Breakpoints variables (required by break @mixin).
 $large: large;
@@ -17,16 +15,16 @@ $x-small: x-small;
 $xs-small: xs-small;
 
 // Colors.
-$color_primary: #2c2c2d;
+$color_primary: #888;
 $color_secondary: #0e0e0e;
 
 $red: #ea272e;
 $red_light: #ff4b52;
 $pink: #c33657;
 $green: #4e8c12;
-$blue: #4978a3;
+$blue: #0d408d;
 $blue_dark: #003e72;
-$orange: #f68323;
+$orange: #ee8c21;
 $yellow: #fdd531;
 $golden: #c4a641;
 $purple: #451336;
@@ -35,7 +33,7 @@ $brown: #53412c;
 $grey_light: #e8e8e8;
 $white_light: #f2f2f2;
 
-$color_link: #3a6492;
+$color_link: $blue;
 $color_hover: #0f4675;
 
 // Project specific color names taken from Zeppelin sketches.
@@ -131,7 +129,7 @@ $subtext: #777;
   }
 }
 
-@mixin font($font_size:18px, $line_height:1.4, $color:$color_primary, $font_weight: 400) {
+@mixin font($font_size:16px, $line_height:1.5, $color:$color_primary, $font_weight: 400) {
   font-size: $font_size;
   line-height: $line_height;
   color: $color;

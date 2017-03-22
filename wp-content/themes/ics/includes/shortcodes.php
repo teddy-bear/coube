@@ -375,7 +375,7 @@ function shortcode_content( $atts, $content = null ) {
 				$output .= '</div>';
 
 				// Content.
-				
+
 
 				if ( $excerpt_count >= 1) {
 					if ( !empty($excerpt)) {
@@ -533,16 +533,52 @@ function shortcode_content( $atts, $content = null ) {
 			case 'logo':
 
 				$output .= '<' . $item_tag . ' class="item item-' . $i . ' ' . $post_classes . ' ' . $class_item . '"><div class="wrapper">';
-				$logo_link = rwmb_meta( "link" );
-				if ( $logo_link ) {
-					$output .= '<a href="' . rwmb_meta( "link" ) . '" target="_blank">';
+
+				if ( $thumb == 'true' ) {
+
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$output .= '<figure class="featured-thumbnail">';
+						if ( $image ) {
+							$output .= '<img  src="' . $image . '" alt="' . get_the_title( $post->ID ) . '"/>';
+						} else {
+							$output .= '<img  src="' . $url . '" alt="' . get_the_title( $post->ID ) . '"/>';
+						}
+						$output .= '</figure>';
+					}
 				}
 
-				$output .= '<img  src="' . $url . '" alt="' . get_the_title( $post->ID ) . '"/>';
 
-				if ( $logo_link ) {
-					$output .= '</a>';
+				// Title.
+				$output .= '<div class="title">';
+				$output .= get_the_title( $post->ID );
+				$output .= '</div>';
+
+				// Content.
+				if ( $excerpt_count >= 1 || $content_count >= 1 ) {
+
+					$output .= '<div class="post-content">';
+					if ( $excerpt_count >= 1 ) {
+
+						$output .= '<div class="excerpt">"';
+						$output .= trim_string_length( $excerpt, $excerpt_count );
+						$output .= '"</div>';
+					}
+					if ( $content_count >= 1 ) {
+						$output .= '<div class="content">"';
+						$output .= trim_string_length( $content, $content_count );
+						$output .= '"</div>';
+					}
+					$output .= '</div>';
 				}
+
+				// Read more link.
+				if ( $more_text_single != "" ) {
+					$output .= '<span class="read-more-wrapper">[';
+					$output .= '<a href="' . get_permalink( $post->ID ) . '" class="read-more" title="' . get_the_title( $post->ID ) . '">';
+					$output .= $more_text_single;
+					$output .= '</a>]</span>';
+				}
+
 
 				$output .= '</div></' . $item_tag . '><!-- .entry (end) -->';
 

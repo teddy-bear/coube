@@ -6,7 +6,7 @@
 @import "header";
 @import "footer";
 @import "slider_theme";
-//@import "owl.carousel.core";
+@import "owl.carousel.core";
 //@import "magnific_popup";
 @import "elements";
 //@import "woocommerce";
@@ -15,129 +15,99 @@
 /* -------------------------------------------------------------------------------------------------------------------
                                                   Custom blocks & decor.
 ------------------------------------------------------------------------------------------------------------------- */
-/* Welcome text the home page.
+/* Logotypes carousel on the home page.
 ------------------------------------------------------------ */
-.row-welcome-text {
-  background-color: #eaeef1;
-  text-align: center;
-  padding: 30px 0;
-  @include font(30px, 1.3, #2c2c2d, 300);
+.row-referenzliste {
+  border-top: 1px solid #b4b4b4;
+  padding: 40px 0 30px;
 }
 
-/* Row with house icon on the home page.
------------------------------------------------------------- */
-.parallax-blue {
-  height: 488px;
-  .container, .row {
-    height: 100%;
-    > div {
-      height: 100%;
-      position: relative;
-    }
-  }
-  .block {
-    color: #fff;
-    line-height: 30px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    h2 {
-      color: #fff;
-    }
-  }
-}
-
-/* Row with solid blue background on the home page.
------------------------------------------------------------- */
-.blue-line-text {
-  text-align: center;
-  @include font(30px, 1.27, #fff, 300);
-  background: $blue;
-  border-top: 10px solid #8aaed0;
-  //padding: 100px 0;
-  padding: 5vw 0;
-  .block {
-    margin: 0 auto;
-    max-width: 980px;
-  }
-  strong {
-    font-weight: 600;
-  }
-  em {
-    font-size: 18px;
-    display: block;
-    font-style: normal;
-    padding: 20px 0;
-  }
-  a.btn {
-  }
-}
-
-/* Row with images on the home page.
------------------------------------------------------------- */
-.image-blocks {
-  overflow: hidden;
-  .block {
-    float: left;
-    width: 33.33%;
-    position: relative;
-    p {
-      padding: 0;
-      line-height: 0;
-    }
-    img {
-      display: block;
-      width: 100%;
-    }
-    strong {
-      @include font(50px, 1.44, #fff, 600);
-      letter-spacing: -2px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      position: absolute;
-      left: 50px;
-      bottom: 44px;
-      @include break($large) {
-        font-size: 40px;
-        left: 40px;
-        bottom: 32px;
-      }
-      @include break($medium) {
-        font-size: 30px;
-        left: 30px;
-        bottom: 20px;
-      }
-    }
-  }
-}
-
-/* Gears background row on the home page.
------------------------------------------------------------- */
-.gears-bg {
-  padding: 90px 0 100px;
-  background-size: contain;
-  background-position: 100% 0;
-  @include break($medium) {
-    padding: 45px 0 50px;
-  }
-  @include break($neutral) {
-
-    background: #fff !important;
-  }
-}
-
-/* About page.
------------------------------------------------------------- */
-.row-about-content {
-  padding-top: 30px;
-  .block {
-    strong {
-      display: block;
+.logo-items {
+  width: auto;
+  padding: 0 30px;
+  .item {
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 30px;
+    .featured-thumbnail {
       padding-bottom: 10px;
-      margin-top: -15px;
+    }
+    .title {
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 600;
+      color: $blue;
+      /*&::after {
+        content: url("../images/icon-stars.png");
+        display: block;
+      }*/
+    }
+    .post-content {
+      font-size: 13px;
+      padding-bottom: 10px;
+    }
+    .read-more-wrapper {
+      color: $blue;
     }
   }
-  .border-bottom {
-    border-bottom: 1px solid #d8d8d8;
-    padding-bottom: 20px;
+  // Prev / next arrows.
+  .owl-nav {
+    font-size: 0;
+    div {
+      position: absolute;
+      top: 50%;
+      width: 26px;
+      height: 80px;
+      transform: translateY(-50%);
+      background: url("../images/carousel-arrow.png") no-repeat;
+      @include break($large) {
+      }
+      .non-touch &:hover {
+        opacity: .7;
+      }
+      &.owl-prev {
+        left: -20px;
+        transform: translateY(-50%) rotate(180deg);
+        @include break($mobile) {
+        }
+      }
+      &.owl-next {
+        right: -20px;
+        @include break($mobile) {
+        }
+      }
+    }
   }
+  // Pagination dots.
+  .owl-dots {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    > div {
+      margin: 0 5px;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border: 1px solid #888;
+      display: inline-block;
+      &:hover,
+      &.active {
+        background: $blue;
+        border-color: $blue;
+      }
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------------------------------------------------
+                                                  Pages & content types.
+------------------------------------------------------------------------------------------------------------------- */
+.page-about {
+
+}
+.block-about-me {
+  text-align: center;
+  color: #fff;
 }

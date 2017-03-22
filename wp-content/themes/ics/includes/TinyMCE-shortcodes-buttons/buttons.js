@@ -803,6 +803,18 @@
                 type: 'menubutton',
                 icon: 'dashicon dashicons-admin-generic',
                 menu: [
+                    // Title
+                    {
+                        text: 'Title',
+                        onclick: function () {
+                            //tinyMCE.activeEditor.dom.toggleClass(tinyMCE.activeEditor.selection.getNode(), 'title');
+                            var selected_content = tinyMCE.activeEditor.selection.getContent();
+                            if (!selected_content) {
+                                selected_content = ' ';
+                            }
+                            editor.insertContent('<span class="title-text">' + selected_content + '</span>');
+                        }
+                    },
                     // Default button
                     {
                         text: 'Default button',
@@ -810,13 +822,6 @@
                             tinyMCE.activeEditor.dom.toggleClass(tinyMCE.activeEditor.selection.getNode(), 'btn');
                         }
                     },
-                    // Button large
-                   /* {
-                        text: 'Button large',
-                        onclick: function () {
-                            tinyMCE.activeEditor.dom.toggleClass(tinyMCE.activeEditor.selection.getNode(), 'btn-large');
-                        }
-                    },*/
                     // Custom button
                     /*					{
                      text: 'Custom button',

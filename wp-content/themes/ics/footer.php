@@ -18,7 +18,14 @@
         <div class="footer-blocks">
             <div class="container">
                 <div class="row">
-					<?php if ( ! dynamic_sidebar( 'Footer blocks' ) ) : endif; ?>
+					<?php //if ( ! dynamic_sidebar( 'Footer blocks' ) ) : endif; ?>
+					<?php get_template_part( 'template-parts/site-logo-secondary' ); ?>
+
+                    <div class="contact-details">
+                        <p><?php echo do_shortcode( '[phone-number ]' ); ?></p>
+                        <p><?php echo do_shortcode( '[email]' ); ?></p>
+						<?php echo show_text_block( 'social-links' ); ?>
+                    </div>
 
                     <!--<div class="col-sm-3 block-logo-text">
 		                <?php /*echo show_text_block( 'footer-logo-text' ); */ ?>
@@ -37,9 +44,14 @@
             <div class="copyright">
 				<?php echo get_theme_mod( 'copyright' ); ?>
             </div>
-            <div class="privacy">
-                <a href="https://www.graphicsbycindy.com/" target="_blank">Web design</a> &
-                <a href="https://www.graphicsbycindy.com/" target="_blank">SEO Houston</a> - Graphics by Cindy
+            <div class="footer-menu">
+                <nav>
+					<?php wp_nav_menu( array(
+						'container' => 'ul',
+						'menu'      => 'Footer',
+					) );
+					?>
+                </nav>
             </div>
         </div>
     </div>
