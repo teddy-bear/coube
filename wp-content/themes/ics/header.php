@@ -57,38 +57,4 @@
         </header>
 
         <div id="content">
-			<?php
-			if ( ! is_front_page() ) {
-
-				// Background image + slogan for the rest of the pages.
-
-				// Get Meta box image value.
-				$images = rwmb_meta( 'header-background', 'type=image' );
-				if ( $detect->isMobile() && ! $detect->isTablet() ) {
-					$images = false;
-				}
-				// Documentation https://metabox.io/docs/get-meta-value/#section-examples
-				if ( $images ) {
-					foreach ( $images as $image ) {
-						// Resize featured image.
-						//print_r( $image );
-						$image_resized_src = aq_resize( $image['full_url'], 810, 273, true, true, true );
-						//echo "<img src='$image_resized_src' alt='{$image['alt']}' />";
-					}
-				}
-				?>
-                <div class="page-title-row <?php if ( ! $images ) {
-					echo 'no-image';
-				} ?>">
-                    <div class="image-background" <?php if ( $images ) {
-						echo 'style="background-image:url(' . $image_resized_src . ');"';
-					} ?>>
-                    </div>
-					<?php get_template_part( 'template-parts/page-title' ); ?>
-                </div>
-			<?php } else { ?>
-                <div class="wrapper row-slider">
-					<?php echo do_shortcode( '[slider]' ); ?>
-                </div>
-			<?php } ?>
             <div class="site-content">

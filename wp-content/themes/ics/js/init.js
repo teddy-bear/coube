@@ -99,6 +99,9 @@
          $(this).wrapInner('<span></span>');
          });*/
 
+        // Need wrapper to center title text
+        $('.title-text').wrap('<span class="title-text-wrap"></span>');
+
         // Popup form.
         $('a[href="#popup-form"]').magnificPopup({
             type: 'inline',
@@ -127,6 +130,29 @@
             gallery: {
                 enabled: true
             }
+        });
+
+        // News carousel.
+        $('.home .news-blocks').owlCarousel({
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 2
+                },
+                768: {
+                    items: 3
+                }
+            },
+            lazyLoad: true,
+            dots: true,
+            nav: true,
+            rewind: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: false,
+            loop: true
         });
 
         // Testimonials carousel.

@@ -350,7 +350,15 @@
                         onclick: function () {
                             editor.insertContent('<div class="spacer">[spacer]</div>');
                         }
+                    },
+                    // Separator
+                    {
+                        text: 'Separator',
+                        onclick: function () {
+                            editor.insertContent('[separator]');
+                        }
                     }
+
                 ]
             });
             /**

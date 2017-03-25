@@ -203,6 +203,16 @@ function spacer_shortcode( $atts, $content = null ) {
 
 add_shortcode( 'spacer', 'spacer_shortcode' );
 
+// Separator
+function separator_shortcode( $atts, $content = null ) {
+
+	$output = '<div class="separator"></div>';
+
+	return $output;
+}
+
+add_shortcode( 'separator', 'separator_shortcode' );
+
 
 /**
  * Content adding section
@@ -347,58 +357,36 @@ function shortcode_content( $atts, $content = null ) {
 				$output .= '</' . $item_tag . '><!-- .entry (end) -->';
 				break;
 
-// Services layout.
+			// Services layout.
 			case 'services':
 				$output .= '<' . $item_tag . ' class="' . $post_classes . ' match ' . $class_item . ' item item-' . $i . '">';
 
 				$output .= '<div class="inner">';
 
-				//$output .= '<a href="' . get_permalink() . '" title="' . get_the_title( $post->ID ) . '">';
+				$output .= '<a href="' . home_url( '/beratung-services#' ) . $post->post_name . '" title="' . get_the_title( $post->ID ) . '">';
 
 				if ( has_post_thumbnail( $post->ID ) ) {
-					$output .= '<figure class="featured-thumbnail">';
-					if ( $image ) {
-						$output .= '<img  src="' . $image . '" alt="' . get_the_title( $post->ID ) . '"/>';
-					} else {
-						$output .= '<img  src="' . $url . '" alt="' . get_the_title( $post->ID ) . '"/>';
-					}
+					$output .= '<figure class="featured-thumbnail" style="background: url(' . $url . ') no-repeat 50% 50%;">';
+					//$output .= '<img  src="' . $url . '" alt="' . get_the_title( $post->ID ) . '"/>';
 					$output .= '</figure>';
 				}
 
 				// Title.
 				$output .= '<div class="title">';
-				$output .= '<h5>';
-				$output .= '<a href="' . get_permalink( $post->ID ) . '" title="' . get_the_title( $post->ID ) . '">';
 				$output .= get_the_title( $post->ID );
-				$output .= '</a>';
-				$output .= '</h5>';
 				$output .= '</div>';
 
 				// Content.
-
-
-				if ( $excerpt_count >= 1) {
-					if ( !empty($excerpt)) {
+				if ( ! empty( $excerpt ) ) {
 
 					$output .= '<div class="post-content">';
-
-						$output .= '<div class="excerpt">';
-						$output .= trim_string_length( $excerpt, $excerpt_count );
-						$output .= '</div>';
-						$output .= '</div>';
-					} else {
-						$output .= '';
-					}
+					$output .= '<div class="excerpt">';
+					$output .= $excerpt;
+					$output .= '</div>';
+					$output .= '</div>';
 				}
 
-				// Read more link.
-				if ( $more_text_single != "" ) {
-					$output .= '<a href="' . get_permalink( $post->ID ) . '" class="more" title="' . get_the_title( $post->ID ) . '">';
-					$output .= $more_text_single;
-					$output .= '</a>';
-				}
-
-				//$output .= '</a>';
+				$output .= '</a>';
 				$output .= '</div>'; //.inner
 
 				$output .= '</' . $item_tag . '><!-- .entry (end) -->';
@@ -468,15 +456,36 @@ function shortcode_content( $atts, $content = null ) {
 			case 'news':
 				$output .= '<' . $item_tag . ' class="' . $post_classes . ' ' . $class_item . ' item item-' . $i . '">';
 
-				// Title.
-				$output .= '<div class="title">';
-				$output .= '<' . $title_tag . '><a href="' . get_permalink( $post->ID ) . '" title="' . get_the_title( $post->ID ) . '">' . get_the_title( $post->ID ) . '</a></' . $title_tag . '>';
+				$output .= '<div class="inner">';
+				//$output .= '<' . $title_tag . '><a href="' . get_permalink( $post->ID ) . '" title="' . get_the_title( $post->ID ) . '">' . get_the_title( $post->ID ) . '</a></' . $title_tag . '>';
+
+				// Meta.
+				$output .= '<div class="meta">';
+
+				// Date.
 				if ( $meta == 'true' ) {
-					$output .= '<span class="meta">';
-					$output .= '<span class="months">' . get_the_time( 'M' ) . '</span> <span class="day">' . get_the_time( 'd' ) . '</span>, <span class="year">' . get_the_time( 'Y' ) . '</span>';
+					$output .= '<span class="date"><i class="fa fa-calendar" aria-hidden="true"></i>';
+					$output .= get_the_time( 'd.M.Y' );
 					$output .= '</span>';
 				}
-				$output .= '</div>';
+
+				// Category taxonomy.
+				$terms = wp_get_post_terms( $post->ID, 'news_category' );
+				if ( $terms ) {
+					$output .= '<span class="categories">';
+					$i           = 0;
+					$terms_count = count( $terms );
+					foreach ( $terms as $term ) {
+						$i ++;
+						$output .= $term->name;
+						if ( $i < $terms_count ) {
+							$output .= ', ';
+						}
+					}
+					$output .= '</span>';
+				}
+
+				$output .= '</div>'; //.meta
 
 				if ( $thumb == 'true' ) {
 
@@ -493,26 +502,26 @@ function shortcode_content( $atts, $content = null ) {
 				$output .= '<div class="wrapper">';
 
 				// Content.
-				if ( $show_content == 'yes' ) {
-					$output .= '<div class="post-content">';
-					$output .= apply_filters( 'the_content', get_the_content( false ) );
-					$output .= '</div>';
-				}
+				$output .= '<div class="post-content">';
+				$output .= $excerpt;
+				$output .= '</div>';
 
 				// Read more link.
 				if ( $more_text_single != "" ) {
+					$output .= '<div class="read-more-wrapper">';
 					$output .= '<a href="' . get_permalink( $post->ID ) . '" class="btn" title="' . get_the_title( $post->ID ) . '">';
 					$output .= $more_text_single;
 					$output .= '</a>';
+					$output .= '</div>';
 				}
 
-				$output .= '</div>';
-				//.wrapper
+				$output .= '</div>'; //.wrapper
+				$output .= '</div>'; //.inner
 
 				$output .= '</' . $item_tag . '><!-- .entry (end) -->';
 				break;
 
-			// Gallery gallery.
+			// Gallery.
 			case 'gallery':
 
 				$output .= '<' . $item_tag . ' class="item item-' . $i . ' ' . $post_classes . ' ' . $class_item . '"><div class="wrapper">';
@@ -813,91 +822,14 @@ function address_shortcode() {
 
 add_shortcode( 'address', 'address_shortcode' );
 
-// Share This Product.
-add_shortcode( 'share', 'share_shortcode' );
-function share_shortcode( $atts, $content = NULL ) {
-	extract( shortcode_atts( array(
-		'title'     => '',
-		'text'      => '',
-		'tooltip'   => 1,
-		'twitter'   => 1,
-		'facebook'  => 1,
-		'pinterest' => 1,
-		'google'    => 1,
-		'mail'      => 1,
-		'class'     => ''
-	), $atts ) );
-	global $post;
-	if ( ! isset( $post->ID ) ) {
-		return;
-	}
-	$html          = '';
-	$permalink     = get_permalink( $post->ID );
-	$tooltip_class = '';
-	if ( $tooltip ) {
-		$tooltip_class = 'title-toolip';
-	}
-	$image      = aq_resize( wp_get_attachment_url( get_post_thumbnail_id(), 'full' ), 150, 150, FALSE );
-	$post_title = rawurlencode( get_the_title( $post->ID ) );
-	if ( $title ) {
-		$html .= '<span class="share-title">' . $title . '</span>';
-	}
-	$html .= '
-        <ul class="menu-social-icons ' . $class . '">
-    ';
-	//$html .= '<li class="label">Share in social media</li>';
-	if ( $twitter == 1 ) {
-		$html .= '
-                <li>
-                    <a href="https://twitter.com/share?url=' . $permalink . '&text=' . $post_title . '" class="' . $tooltip_class . '" title="' . __( 'Twitter', ET_DOMAIN ) . '" target="_blank">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-        ';
-	}
-	if ( $facebook == 1 ) {
-		$html .= '
-                <li>
-                    <a href="http://www.facebook.com/sharer.php?u=' . $permalink . '&amp;images=' . $image . '" class="' . $tooltip_class . '" title="' . __( 'Facebook', ET_DOMAIN ) . '" target="_blank">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-        ';
-	}
+// Google map (custom styles).
+function map_shortcode() {
+	$output = "<div id='map'><i class=\"fa fa-spinner fa-pulse\"></i></div>";
+	$output .= "<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js'></script>";
+	$output .= "<script type='text/javascript' src='" . get_template_directory_uri() . "/js/libs/map_styles.js'></script>";
 
-	if ( $pinterest == 1 ) {
-		$html .= '
-                <li>
-                    <a href="http://pinterest.com/pin/create/button/?url=' . $permalink . '&amp;media=' . $image . '&amp;description=' . $post_title . '" class="' . $tooltip_class . '" title="' . __( 'Pinterest', ET_DOMAIN ) . '" target="_blank">
-                        <i class="fa fa-pinterest"></i>
-                    </a>
-                </li>
-        ';
-	}
+	return $output;
 
-	if ( $google == 1 ) {
-		$html .= '
-                <li>
-                    <a href="http://plus.google.com/share?url=' . $permalink . '&title=' . $text . '" class="' . $tooltip_class . '" title="' . __( 'Google +', ET_DOMAIN ) . '" target="_blank">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                </li>
-        ';
-	}
-
-	if ( $mail == 1 ) {
-		$html .= '
-                <li>
-                    <a href="mailto:enteryour@addresshere.com?subject=' . $post_title . '&amp;body=Check%20this%20out:%20' . $permalink . '" class="' . $tooltip_class . '" title="' . __( 'Mail to friend', ET_DOMAIN ) . '" target="_blank">
-                        <i class="fa fa-envelope-o"></i>
-                    </a>
-                </li>
-        ';
-	}
-
-	$html .= '
-        </ul>
-    ';
-
-	return $html;
 }
+
+add_shortcode( 'map', 'map_shortcode' );

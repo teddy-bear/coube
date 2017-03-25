@@ -440,26 +440,26 @@ function post_type_gallery() {
 	);
 }
 
-/* Programs */
-//add_action( 'init', 'post_type_programs' );
-function post_type_programs() {
+/* Projects */
+add_action( 'init', 'post_type_projects' );
+function post_type_projects() {
 	$labels = array(
-		'name'               => _x( 'Programs', 'post type general name', '' ),
-		'singular_name'      => _x( 'Programs', 'post type singular name', '' ),
-		'menu_name'          => _x( 'Programs', 'admin menu', '' ),
-		'name_admin_bar'     => _x( 'Programs', 'add new on admin bar', '' ),
-		'add_new'            => __( 'Add New Program', '' ),
-		'add_new_item'       => __( 'Add New Program', '' ),
-		'new_item'           => __( 'New Program', '' ),
-		'edit_item'          => __( 'Edit Program', '' ),
-		'view_item'          => __( 'View Program', '' ),
-		'all_items'          => __( 'All Programs', '' ),
-		'search_items'       => __( 'Search Program', '' ),
-		'parent_item_colon'  => __( 'Parent Program:', '' ),
-		'not_found'          => __( 'No Programs found.', '' ),
-		'not_found_in_trash' => __( 'No Programs found in Trash.', '' )
+		'name'               => _x( 'Projects', 'post type general name', '' ),
+		'singular_name'      => _x( 'Projects', 'post type singular name', '' ),
+		'menu_name'          => _x( 'Projects', 'admin menu', '' ),
+		'name_admin_bar'     => _x( 'Projects', 'add new on admin bar', '' ),
+		'add_new'            => __( 'Add New Project', '' ),
+		'add_new_item'       => __( 'Add New Project', '' ),
+		'new_item'           => __( 'New Project', '' ),
+		'edit_item'          => __( 'Edit Project', '' ),
+		'view_item'          => __( 'View Project', '' ),
+		'all_items'          => __( 'All Projects', '' ),
+		'search_items'       => __( 'Search Project', '' ),
+		'parent_item_colon'  => __( 'Parent Project:', '' ),
+		'not_found'          => __( 'No Projects found.', '' ),
+		'not_found_in_trash' => __( 'No Projects found in Trash.', '' )
 	);
-	register_post_type( 'programs',
+	register_post_type( 'projects',
 		array(
 			'labels'            => $labels,
 			'public'            => true,
@@ -468,12 +468,12 @@ function post_type_programs() {
 			'menu_position'     => 7,
 			'menu_icon'         => 'dashicons-id-alt',
 			'rewrite'           => array(
-				'slug' => 'programs',
+				'slug' => 'projects',
 			),
 			'supports'          => array(
 				'title',
-				'excerpt',
-				'editor'
+				/*'excerpt',
+				'editor'*/
 			)
 		)
 	);

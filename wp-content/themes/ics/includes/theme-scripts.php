@@ -104,7 +104,7 @@ function theme_scripts() {
 	wp_enqueue_script( 'owl_carousel', $scripts_path . 'libs/owl.carousel.min.js', array( 'jquery' ), '2', true );
 
 	// Parallax effect for rows background.
-	wp_enqueue_script( 'parallax', $scripts_path . 'libs/jquery.parallax.min.js', array( 'jquery' ), '', true );
+	//wp_enqueue_script( 'parallax', $scripts_path . 'libs/jquery.parallax.min.js', array( 'jquery' ), '', true );
 
 	// Cookies.
 	//wp_enqueue_script( 'cookies', $scripts_path . 'libs/cookie.min.js', array( 'jquery' ), '', true );

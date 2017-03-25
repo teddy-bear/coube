@@ -15,8 +15,8 @@ $x-small: x-small;
 $xs-small: xs-small;
 
 // Colors.
-$color_primary: #888;
-$color_secondary: #0e0e0e;
+$color_primary: #333;
+$color_secondary: #888;
 
 $red: #ea272e;
 $red_light: #ff4b52;
@@ -129,7 +129,7 @@ $subtext: #777;
   }
 }
 
-@mixin font($font_size:16px, $line_height:1.5, $color:$color_primary, $font_weight: 400) {
+@mixin font($font_size:16px, $line_height:1.6, $color:$color_primary, $font_weight: 400) {
   font-size: $font_size;
   line-height: $line_height;
   color: $color;

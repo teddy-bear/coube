@@ -26,7 +26,7 @@
 
     // Add parallax to each text block.
     $('.background-parallax').each(function () {
-      $(this).parallax();
+      //$(this).parallax();
     })
 
   });

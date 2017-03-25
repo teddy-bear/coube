@@ -1,6 +1,8 @@
 <?php
 /**
  * The advanced image upload field which uses WordPress media popup to upload and select images.
+ *
+ * @package Meta Box
  */
 
 /**
@@ -8,7 +10,7 @@
  */
 class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	/**
-	 * Enqueue scripts and styles
+	 * Enqueue scripts and styles.
 	 */
 	public static function admin_enqueue_scripts() {
 		parent::admin_enqueue_scripts();
@@ -17,15 +19,23 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	}
 
 	/**
-	 * Normalize parameters for field
+	 * Normalize parameters for field.
 	 *
-	 * @param array $field
+	 * @param array $field Field parameters.
 	 *
 	 * @return array
 	 */
 	public static function normalize( $field ) {
 		$field['mime_type'] = 'image';
-		$field              = parent::normalize( $field );
+		$field              = wp_parse_args( $field, array(
+			'image_size' => 'thumbnail',
+		) );
+
+		$field = parent::normalize( $field );
+
+		$field['js_options'] = wp_parse_args( $field['js_options'], array(
+			'imageSize' => $field['image_size'],
+		) );
 
 		return $field;
 	}
@@ -33,9 +43,9 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	/**
 	 * Get the field value.
 	 *
-	 * @param array $field
-	 * @param array $args
-	 * @param null  $post_id
+	 * @param array $field   Field parameters.
+	 * @param array $args    Additional arguments.
+	 * @param null  $post_id Post ID.
 	 * @return mixed
 	 */
 	public static function get_value( $field, $args = array(), $post_id = null ) {
@@ -47,7 +57,7 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	 *
 	 * @param int   $file Attachment image ID (post ID). Required.
 	 * @param array $args Array of arguments (for size).
-	 * @return array|bool False if file not found. Array of image info on success
+	 * @return array|bool False if file not found. Array of image info on success.
 	 */
 	public static function file_info( $file, $args = array() ) {
 		return RWMB_Image_Field::file_info( $file, $args );
@@ -56,8 +66,8 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	/**
 	 * Format value for the helper functions.
 	 *
-	 * @param array        $field Field parameter
-	 * @param string|array $value The field meta value
+	 * @param array        $field Field parameters.
+	 * @param string|array $value The field meta value.
 	 * @return string
 	 */
 	public static function format_value( $field, $value ) {
@@ -67,8 +77,8 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	/**
 	 * Format a single value for the helper functions.
 	 *
-	 * @param array $field Field parameter
-	 * @param array $value The value
+	 * @param array $field Field parameters.
+	 * @param array $value The value.
 	 * @return string
 	 */
 	public static function format_single_value( $field, $value ) {
@@ -76,9 +86,7 @@ class RWMB_Image_Advanced_Field extends RWMB_Media_Field {
 	}
 
 	/**
-	 * Template for media item
-	 *
-	 * @return void
+	 * Template for media item.
 	 */
 	public static function print_templates() {
 		parent::print_templates();

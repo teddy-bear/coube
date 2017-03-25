@@ -43,12 +43,6 @@
   position: relative;
   clear: both;
   .not-home & {
-    padding-top: 50px;
-    padding-bottom: 40px;
-    @include break($mobile) {
-      padding-top: 35px;
-      padding-bottom: 25px;
-    }
   }
 }
 
@@ -552,7 +546,7 @@ div.wpcf7 {
   .wpcf7-form-control-wrap {
     display: block;
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     // Captcha field wrapper.
     &.captcha {
       float: left;
@@ -624,12 +618,12 @@ div.wpcf7 {
 
   // Submit button.
   .wpcf7-submit {
-    float: left;
+    float: right;
   }
 
   .g-recaptcha {
     > div {
-      float: right;
+      float: left;
     }
   }
 

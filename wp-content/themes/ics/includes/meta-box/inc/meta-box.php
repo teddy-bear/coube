@@ -16,25 +16,21 @@
 class RW_Meta_Box {
 	/**
 	 * Meta box parameters.
+	 *
 	 * @var array
 	 */
 	public $meta_box;
 
 	/**
-	 * Fields parameters.
-	 * @var array
-	 */
-	public $fields;
-
-	/**
 	 * Detect whether the meta box is saved at least once.
 	 * Used to prevent duplicated calls like revisions, manual hook to wp_insert_post, etc.
+	 *
 	 * @var bool
 	 */
 	public $saved = false;
 
 	/**
-	 * Create meta box based on given data
+	 * Create meta box based on given data.
 	 *
 	 * @param array $meta_box Meta box definition.
 	 */
@@ -43,7 +39,6 @@ class RW_Meta_Box {
 		$meta_box['fields'] = self::normalize_fields( $meta_box['fields'] );
 
 		$this->meta_box = $meta_box;
-		$this->fields   = &$this->meta_box['fields'];
 
 		if ( $this->is_shown() ) {
 			$this->global_hooks();
@@ -62,7 +57,7 @@ class RW_Meta_Box {
 	protected function is_shown() {
 		$show = apply_filters( 'rwmb_show', true, $this->meta_box );
 
-		return apply_filters( "rwmb_show_{$this->meta_box['id']}", $show, $this->meta_box );
+		return apply_filters( "rwmb_show_{$this->id}", $show, $this->meta_box );
 	}
 
 	/**
@@ -90,7 +85,7 @@ class RW_Meta_Box {
 		add_filter( 'default_hidden_meta_boxes', array( $this, 'hide' ), 10, 2 );
 
 		// Save post meta.
-		foreach ( $this->meta_box['post_types'] as $post_type ) {
+		foreach ( $this->post_types as $post_type ) {
 			if ( 'attachment' === $post_type ) {
 				// Attachment uses other hooks.
 				// @see wp_update_post(), wp_insert_attachment().
@@ -106,7 +101,7 @@ class RW_Meta_Box {
 	 * Enqueue common scripts and styles.
 	 */
 	public function enqueue() {
-		if ( ! $this->is_edit_screen() ) {
+		if ( is_admin() && ! $this->is_edit_screen() ) {
 			return;
 		}
 
@@ -129,7 +124,7 @@ class RW_Meta_Box {
 		}
 
 		// Auto save.
-		if ( $this->meta_box['autosave'] ) {
+		if ( $this->autosave ) {
 			wp_enqueue_script( 'rwmb-autosave', RWMB_JS_URL . 'autosave.js', array( 'jquery' ), RWMB_VER, true );
 		}
 
@@ -145,14 +140,14 @@ class RW_Meta_Box {
 	 * Add meta box for multiple post types
 	 */
 	public function add_meta_boxes() {
-		foreach ( $this->meta_box['post_types'] as $post_type ) {
+		foreach ( $this->post_types as $post_type ) {
 			add_meta_box(
-				$this->meta_box['id'],
-				$this->meta_box['title'],
+				$this->id,
+				$this->title,
 				array( $this, 'show' ),
 				$post_type,
-				$this->meta_box['context'],
-				$this->meta_box['priority']
+				$this->context,
+				$this->priority
 			);
 		}
 	}
@@ -166,8 +161,8 @@ class RW_Meta_Box {
 	 * @return array
 	 */
 	public function hide( $hidden, $screen ) {
-		if ( $this->is_edit_screen( $screen ) && $this->meta_box['default_hidden'] ) {
-			$hidden[] = $this->meta_box['id'];
+		if ( $this->is_edit_screen( $screen ) && $this->default_hidden ) {
+			$hidden[] = $this->id;
 		}
 
 		return $hidden;
@@ -182,16 +177,16 @@ class RW_Meta_Box {
 		// Container.
 		printf(
 			'<div class="rwmb-meta-box" data-autosave="%s">',
-			$this->meta_box['autosave'] ? 'true' : 'false'
+			$this->autosave ? 'true' : 'false'
 		);
 
-		wp_nonce_field( "rwmb-save-{$this->meta_box['id']}", "nonce_{$this->meta_box['id']}" );
+		wp_nonce_field( "rwmb-save-{$this->id}", "nonce_{$this->id}" );
 
 		// Allow users to add custom code before meta box content.
 		// 1st action applies to all meta boxes.
 		// 2nd action applies to only current meta box.
 		do_action( 'rwmb_before', $this );
-		do_action( "rwmb_before_{$this->meta_box['id']}", $this );
+		do_action( "rwmb_before_{$this->id}", $this );
 
 		foreach ( $this->fields as $field ) {
 			RWMB_Field::call( 'show', $field, $saved );
@@ -201,7 +196,7 @@ class RW_Meta_Box {
 		// 1st action applies to all meta boxes.
 		// 2nd action applies to only current meta box.
 		do_action( 'rwmb_after', $this );
-		do_action( "rwmb_after_{$this->meta_box['id']}", $this );
+		do_action( "rwmb_after_{$this->id}", $this );
 
 		// End container.
 		echo '</div>';
@@ -219,17 +214,19 @@ class RW_Meta_Box {
 		$this->saved = true;
 
 		// Make sure meta is added to the post, not a revision.
-		if ( $the_post = wp_is_post_revision( $post_id ) ) {
+		$the_post = wp_is_post_revision( $post_id );
+		if ( $the_post ) {
 			$post_id = $the_post;
 		}
 
 		// Before save action.
 		do_action( 'rwmb_before_save_post', $post_id );
-		do_action( "rwmb_{$this->meta_box['id']}_before_save_post", $post_id );
+		do_action( "rwmb_{$this->id}_before_save_post", $post_id );
 
 		foreach ( $this->fields as $field ) {
 			$single = $field['clone'] || ! $field['multiple'];
 			$old    = RWMB_Field::call( $field, 'raw_meta', $post_id );
+			// @codingStandardsIgnoreLine
 			$new    = isset( $_POST[ $field['id'] ] ) ? $_POST[ $field['id'] ] : ( $single ? '' : array() );
 
 			// Allow field class change the value.
@@ -247,7 +244,7 @@ class RW_Meta_Box {
 
 		// After save action.
 		do_action( 'rwmb_after_save_post', $post_id );
-		do_action( "rwmb_{$this->meta_box['id']}_after_save_post", $post_id );
+		do_action( "rwmb_{$this->id}_after_save_post", $post_id );
 	}
 
 	/**
@@ -258,13 +255,13 @@ class RW_Meta_Box {
 	 *
 	 * @return bool
 	 */
-	protected function validate() {
-		$nonce = (string) filter_input( INPUT_POST, "nonce_{$this->meta_box['id']}" );
+	public function validate() {
+		$nonce = filter_input( INPUT_POST, "nonce_{$this->id}", FILTER_SANITIZE_STRING );
 
 		return
-			true !== $this->saved
-			&& ( ! defined( 'DOING_AUTOSAVE' ) || $this->meta_box['autosave'] )
-			&& wp_verify_nonce( $nonce, "rwmb-save-{$this->meta_box['id']}" );
+			! $this->saved
+			&& ( ! defined( 'DOING_AUTOSAVE' ) || $this->autosave )
+			&& wp_verify_nonce( $nonce, "rwmb-save-{$this->id}" );
 	}
 
 	/**
@@ -311,7 +308,7 @@ class RW_Meta_Box {
 		foreach ( $fields as $k => $field ) {
 			$field = RWMB_Field::call( 'normalize', $field );
 
-			// Allow to add default values for fields
+			// Allow to add default values for fields.
 			$field = apply_filters( 'rwmb_normalize_field', $field );
 			$field = apply_filters( "rwmb_normalize_{$field['type']}_field", $field );
 			$field = apply_filters( "rwmb_normalize_{$field['id']}_field", $field );
@@ -359,6 +356,28 @@ class RW_Meta_Box {
 			$screen = get_current_screen();
 		}
 
-		return 'post' === $screen->base && in_array( $screen->post_type, $this->meta_box['post_types'], true );
+		return 'post' === $screen->base && in_array( $screen->post_type, $this->post_types, true );
+	}
+
+	/**
+	 * Magic function to get meta box property.
+	 *
+	 * @param string $key Meta box property name.
+	 *
+	 * @return mixed
+	 */
+	public function __get( $key ) {
+		return isset( $this->meta_box[ $key ] ) ? $this->meta_box[ $key ] : false;
+	}
+
+	/**
+	 * Magic function to check if meta box property is set.
+	 *
+	 * @param string $key Meta box property name.
+	 *
+	 * @return bool
+	 */
+	public function __isset( $key ) {
+		return isset( $this->meta_box[ $key ] );
 	}
 }

@@ -125,7 +125,7 @@ $meta_boxes[] = array(
 );
 
 // Header section (header background + slogan).
-$meta_boxes[] = array(
+$meta_boxes1[] = array(
 	'id'         => 'header-background-meta-box',
 	'title'      => __( 'Header section' ),
 	'post_types' => array( 'page', 'news', 'services' ),
@@ -205,33 +205,39 @@ $meta_boxes[] = array(
 	)
 );
 
-// Title block on single services
+// Projects services
 $meta_boxes[] = array(
-	'id'         => 'ss-title-box',
-	'title'      => __( 'Title area' ),
-	'post_types' => array( 'services' ),
+	'id'         => 'projects-meta-box',
+	'title'      => __( 'Custom fields' ),
+	'post_types' => array( 'projects' ),
 	'context'    => 'normal',
 	'priority'   => 'high',
 	'fields'     => array(
 		array(
-			'name' => __( 'Title' ),
-			'id'   => "ss-title",
-			//'desc' => __( 'enter location' ),
-			'type' => 'text'
-		),
-		array(
-			'name' => __( 'On Image title' ),
-			'id'   => "ss-image-title",
-			//'desc' => __( 'enter location' ),
-			'type' => 'text'
-		),
-		array(
-			'name' => __( 'Content' ),
-			'id'   => "ss-content",
-			//'desc' => __( 'enter location' ),
+			'name' => __( 'Projektbeschreibung' ),
+			'id'   => "content01",
 			'type' => 'textarea'
 		),
-
+		array(
+			'name' => __( 'Aufgabe' ),
+			'id'   => "aufgabe",
+			'type' => 'textarea'
+		),
+		array(
+			'name' => __( 'Projektzeitraum' ),
+			'id'   => "projektzeitraum",
+			'type' => 'textarea'
+		),
+		array(
+			'name' => __( 'Tätigkeiten' ),
+			'id'   => "tätigkeiten",
+			'type' => 'wysiwyg'
+		),
+		array(
+			'name' => __( 'Anwendung von:' ),
+			'id'   => "anwendung",
+			'type' => 'textarea'
+		),
 	)
 );
 
