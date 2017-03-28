@@ -205,7 +205,7 @@ function custom_login_logo() { ?>
         }
 
         #loginform label {
-            color: #fff;
+
         }
 
         .login form .input,
