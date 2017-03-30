@@ -199,10 +199,11 @@ hr {
 .list ul,
 ul.list {
   margin-bottom: 20px;
-  li {
+  > li {
     padding: 0 0 10px 28px;
     position: relative;
     background: url(../images/icon-list.png) no-repeat 0 2px;
+    text-align: left;
     ul {
       margin: 15px 0 0 0;
       li {
@@ -292,38 +293,40 @@ article,
   table {
     width: 100%;
     margin-bottom: 30px;
+    padding: 2px;
+    border: 1px solid #d7d7d7;
     tr {
-      background: #ededed;
-      border-bottom: 1px solid #fff;
+      background: #fff;
+      border-bottom: 1px solid #ebebeb;
       &:nth-child(2n+1) {
-        background: #f7f7f7;
+        background: #fafafa;
       }
       &:hover {
-        background: darken($white_light, 10%);
+        background: #f9f9f9;
       }
       > *:first-child {
-        text-align: left;
         border-left: none;
       }
     }
     th {
-      padding: 5px 5px 5px 20px;
-      font-size: 18px;
+      padding: 15px;
+      font-size: 20px;
       font-weight: 600;
-      border-left: 1px solid #fff;
-      color: #fff;
-      background: $color_link;
+      border-left: 1px solid #ebebeb;
+      color: $blue;
+      background: #f2f2f2;
+      text-align: center;
       @include break($x-small) {
-        padding-left: 10px;
         font-size: 15px;
         white-space: nowrap;
       }
     }
     td {
-      font-size: 14px;
-      color: #202020;
-      border-left: 1px solid #fff;
-      padding: 5px 5px 5px 20px;
+      color: #888888;
+      font-size: 16px;
+      border-left: 1px solid #ebebeb;
+      padding: 15px;
+      text-align: center;
     }
   }
 }
@@ -331,6 +334,8 @@ article,
 div.table {
   overflow-x: auto;
   margin-bottom: 30px;
+  max-height: 420px;
+  overflow-y: auto;
 }
 
 /* Images.

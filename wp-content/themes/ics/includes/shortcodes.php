@@ -472,7 +472,7 @@ function shortcode_content( $atts, $content = null ) {
 				// Category taxonomy.
 				$terms = wp_get_post_terms( $post->ID, 'news_category' );
 				if ( $terms ) {
-					$output .= '<span class="categories">';
+					$output      .= '<span class="categories">';
 					$i           = 0;
 					$terms_count = count( $terms );
 					foreach ( $terms as $term ) {
@@ -732,8 +732,8 @@ function shortcode_content( $atts, $content = null ) {
 				//$name     = rwmb_meta( 'name' );
 				$location = rwmb_meta( 'location' );
 				$service  = rwmb_meta( 'service' );
-				$output .= '<div class="custom-fields">';
-				$output .= '<span class="name">' . get_the_title( $post->ID ) . '</span>';
+				$output   .= '<div class="custom-fields">';
+				$output   .= '<span class="name">' . get_the_title( $post->ID ) . '</span>';
 				if ( $location ) {
 					$output .= ', <span class="location">' . rwmb_meta( 'location' ) . '</span>';
 				}
@@ -822,14 +822,36 @@ function address_shortcode() {
 
 add_shortcode( 'address', 'address_shortcode' );
 
-// Google map (custom styles).
-function map_shortcode() {
-	$output = "<div id='map'><i class=\"fa fa-spinner fa-pulse\"></i></div>";
-	$output .= "<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js'></script>";
-	$output .= "<script type='text/javascript' src='" . get_template_directory_uri() . "/js/libs/map_styles.js'></script>";
+// Tab title
+function tab_title_shortcode( $atts, $content = null ) {
+
+	extract( shortcode_atts( array(
+		'class' => ''
+	), $atts ) );
+
+	// add divs to the content
+	$output = '<div class="tab-link">';
+	$output .= do_shortcode( $content );
+	$output .= '</div> <!-- .container (end) -->';
 
 	return $output;
-
 }
 
-add_shortcode( 'map', 'map_shortcode' );
+add_shortcode( 'tab_title', 'tab_title_shortcode' );
+
+// Tab content.
+function tab_content_shortcode( $atts, $content = null ) {
+
+	extract( shortcode_atts( array(
+		'class' => ''
+	), $atts ) );
+
+	// add divs to the content
+	$output = '<div class="tab-content">';
+	$output .= do_shortcode( $content );
+	$output .= '</div> <!-- .container (end) -->';
+
+	return $output;
+}
+
+add_shortcode( 'tab_content', 'tab_content_shortcode' );
