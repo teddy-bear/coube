@@ -19,15 +19,6 @@
 
     cf7_extra();
 
-    // Youtube video close after finish.
-    function onPlayerStateChange(event) {
-        switch (event.data) {
-            case YT.PlayerState.ENDED:
-                $.magnificPopup.close();
-                break;
-        }
-    }
-
     // Show drop down on first menu click.
     function preventMenuAction() {
         if ($(window).width() > 767) {
@@ -132,6 +123,19 @@
             }
         });
 
+        // Plans carousel.
+        $('.home .plans-blocks').owlCarousel({
+            items: 1,
+            lazyLoad: true,
+            dots: true,
+            nav: false,
+            rewind: false,
+            autoplay: true,
+            autoplayTimeout: 25000,
+            autoplayHoverPause: false,
+            loop: true
+        });
+
         // News carousel.
         $('.home .news-blocks').owlCarousel({
             responsive: {
@@ -200,8 +204,7 @@
         wow.init();
 
         // Equal height for blocks.
-        $('.match, .row-content-bottom .block, .featured-blocks .block .text, .red-icons .block .text, ul.products .product_item_title').matchHeight();
-        $('ul.products .custom-attributes').matchHeight();
+        $('.match').matchHeight();
 
         // Scripts for mobile devices.
         if ($(window).width() < 768) {

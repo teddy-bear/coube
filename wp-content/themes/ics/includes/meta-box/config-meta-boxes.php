@@ -334,6 +334,28 @@ $meta_boxes[] = array(
 	)
 );
 
+// News select box.
+$meta_boxes[] = array(
+	'id'         => 'news-meta-box',
+	'title'      => __( 'Custom' ),
+	'post_types' => array( 'news' ),
+	'context'    => 'side',
+	'priority'   => 'high',
+	'fields'     => array(
+		array(
+			'name'        => 'Priority',
+			'id'          => "priority",
+			'type'        => 'select',
+			'options'     => array(
+				'High'   => 'High',
+				'Medium' => 'Medium',
+				'Low'    => 'Low',
+			),
+			'placeholder' => 'please select',
+		),
+	)
+);
+
 // Custom fields for Vacancies post type.
 $meta_boxes[] = array(
 	// Meta box id, UNIQUE per meta box. Optional since 4.1.5

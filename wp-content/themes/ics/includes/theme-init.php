@@ -311,38 +311,38 @@ function post_type_news() {
 	);
 }
 
-/* Team Members */
-//add_action( 'init', 'post_type_team' );
-function post_type_team() {
+/* Plans */
+add_action( 'init', 'post_type_plans' );
+function post_type_plans() {
 	$labels = array(
-		'name'               => _x( 'Team Members', 'post type general name', '' ),
-		'singular_name'      => _x( 'Team Members', 'post type singular name', '' ),
-		'menu_name'          => _x( 'Team Members', 'admin menu', '' ),
-		'name_admin_bar'     => _x( 'Team Members', 'add new on admin bar', '' ),
-		'add_new'            => __( 'Add Team Member', '' ),
-		'add_new_item'       => __( 'Add Team Member', '' ),
-		'new_item'           => __( 'Team Member', '' ),
-		'edit_item'          => __( 'Edit Team Members', '' ),
-		'view_item'          => __( 'View Team Members', '' ),
-		'all_items'          => __( 'All Team Members', '' ),
-		'search_items'       => __( 'Search Team Members', '' ),
-		'parent_item_colon'  => __( 'Parent Team Members:', '' ),
-		'not_found'          => __( 'No Team Members found.', '' ),
-		'not_found_in_trash' => __( 'No Team Members found in Trash.', '' )
+		'name'               => _x( 'Plans', 'post type general name', '' ),
+		'singular_name'      => _x( 'Plans', 'post type singular name', '' ),
+		'menu_name'          => _x( 'Plans', 'admin menu', '' ),
+		'name_admin_bar'     => _x( 'Plans', 'add new on admin bar', '' ),
+		'add_new'            => __( 'Add Plan', '' ),
+		'add_new_item'       => __( 'Add Plan', '' ),
+		'new_item'           => __( 'Plan', '' ),
+		'edit_item'          => __( 'Edit Plans', '' ),
+		'view_item'          => __( 'View Plans', '' ),
+		'all_items'          => __( 'All Plans', '' ),
+		'search_items'       => __( 'Search Plans', '' ),
+		'parent_item_colon'  => __( 'Parent Plans:', '' ),
+		'not_found'          => __( 'No Plans found.', '' ),
+		'not_found_in_trash' => __( 'No Plans found in Trash.', '' )
 	);
-	register_post_type( 'team',
+	register_post_type( 'plan',
 		array(
 			'labels'              => $labels,
 			'public'              => true,
 			'menu_position'       => 8,
-			'menu_icon'           => 'dashicons-format-status',
+			'menu_icon'           => 'dashicons-format-aside',
 			'publicly_queriable'  => false,
 			'exclude_from_search' => true,
 			'supports'            => array(
 				'title',
 				'editor',
-				'excerpt',
-				'thumbnail'
+				/*'excerpt',
+				'thumbnail'*/
 			)
 		)
 	);

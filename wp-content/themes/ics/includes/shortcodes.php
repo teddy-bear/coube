@@ -454,7 +454,8 @@ function shortcode_content( $atts, $content = null ) {
 
 			// News layout.
 			case 'news':
-				$output .= '<' . $item_tag . ' class="' . $post_classes . ' ' . $class_item . ' item item-' . $i . '">';
+				$priority = rwmb_meta( 'priority' );
+				$output   .= '<' . $item_tag . ' class="' . $post_classes . ' ' . $class_item . ' item item-' . $i . '">';
 
 				$output .= '<div class="inner">';
 				//$output .= '<' . $title_tag . '><a href="' . get_permalink( $post->ID ) . '" title="' . get_the_title( $post->ID ) . '">' . get_the_title( $post->ID ) . '</a></' . $title_tag . '>';
@@ -472,7 +473,7 @@ function shortcode_content( $atts, $content = null ) {
 				// Category taxonomy.
 				$terms = wp_get_post_terms( $post->ID, 'news_category' );
 				if ( $terms ) {
-					$output      .= '<span class="categories">';
+					$output      .= '<span class="categories"><i class="fa fa-file-text-o" aria-hidden="true"></i>';
 					$i           = 0;
 					$terms_count = count( $terms );
 					foreach ( $terms as $term ) {
@@ -486,6 +487,9 @@ function shortcode_content( $atts, $content = null ) {
 				}
 
 				$output .= '</div>'; //.meta
+
+				// Title.
+				$output .= '<div class="title priority-' . $priority . '"><i class="fa fa-info-circle" aria-hidden="true"></i>' . get_the_title( $post->ID ) . '</div>';
 
 				if ( $thumb == 'true' ) {
 
@@ -522,7 +526,8 @@ function shortcode_content( $atts, $content = null ) {
 				break;
 
 			// Gallery.
-			case 'gallery':
+			case
+			'gallery':
 
 				$output .= '<' . $item_tag . ' class="item item-' . $i . ' ' . $post_classes . ' ' . $class_item . '"><div class="wrapper">';
 
@@ -533,6 +538,22 @@ function shortcode_content( $atts, $content = null ) {
 				$output .= get_the_title( $post->ID );
 				$output .= '</span>';
 				$output .= '</a>';
+
+				$output .= '</div></' . $item_tag . '><!-- .entry (end) -->';
+
+				break;
+
+			// Plans.
+			case
+			'plans':
+
+				$output .= '<' . $item_tag . ' class="item item-' . $i . ' ' . $post_classes . ' ' . $class_item . '"><div class="wrapper">';
+
+
+				// Content.
+				$output .= '<div class="content">';
+				$output .= apply_filters( 'the_content', $content );
+				$output .= '</div>';
 
 				$output .= '</div></' . $item_tag . '><!-- .entry (end) -->';
 

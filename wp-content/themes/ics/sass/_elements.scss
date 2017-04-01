@@ -423,7 +423,7 @@ img.border {
 }
 
 h1 {
-  @include font(40px, 1.2, #616365, 700);
+  @include font(40px, 1.2, $blue, 300);
   margin-bottom: .5em;
   @include break($large) {
     font-size: 37px;

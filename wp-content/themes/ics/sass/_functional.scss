@@ -342,10 +342,11 @@ body .posts-navigation {
     }
     &.custom {
       width: auto;
+      padding: 0 10px;
     }
     &:hover {
       color: #fff;
-      background: $red;
+      background: $orange;
       text-decoration: none;
     }
     &:focus,
@@ -354,7 +355,7 @@ body .posts-navigation {
     }
   }
   span.current {
-    background: #c01f1f;
+    background: $orange;
     color: #fff;
   }
 }
