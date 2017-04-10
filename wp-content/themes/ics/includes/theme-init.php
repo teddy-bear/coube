@@ -299,7 +299,7 @@ function post_type_news() {
 		'add_or_remove_items'        => __( 'Add or remove categories' ),
 		'choose_from_most_used'      => __( 'Choose from the most used categories' ),
 		'not_found'                  => __( 'No categories found.' ),
-		'menu_name'                  => __( 'Services Categories' ),
+		'menu_name'                  => __( 'News Categories' ),
 	);
 	register_taxonomy(
 		'news_category',

@@ -12,13 +12,15 @@ get_header(); ?>
 <div class="container">
 
     <main class="main-column">
-        <?php
-        // Show default page content.
-        while (have_posts()) {
-            the_post();
-            the_content();
-        }
-        ?>
+        <div class="row-padding">
+			<?php
+			// Show default page content.
+			while ( have_posts() ) {
+				the_post();
+				the_content();
+			}
+			?>
+        </div>
     </main>
 
 </div>

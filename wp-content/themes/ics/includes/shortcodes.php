@@ -112,20 +112,27 @@ function block_shortcode( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'class' => '',
+		'id'    => '',
 		'link'  => ''
 	), $atts ) );
 
+	$block_id = '';
+
+	if ( $id ) {
+		$block_id = 'id="' . $id . '"';
+	}
+
 	if ( $link != '' ) {
-		$output = '<div class="block ' . $class . '">';
-		$output .= '<a href="' . $link . '">';
+		$output = ' < div class="block ' . $class . '" > ';
+		$output .= '<a href = "' . $link . '" > ';
 		$output .= do_shortcode( $content );
-		$output .= '</a>';
-		$output .= '</div>';
+		$output .= '</a > ';
+		$output .= '</div > ';
 	} else {
 		// add divs to the content
-		$output = '<div class="block ' . $class . '">';
+		$output = '<div class="block ' . $class . '" ' . $block_id . '> ';
 		$output .= do_shortcode( $content );
-		$output .= '</div>';
+		$output .= '</div > ';
 	}
 
 	return $output;
@@ -141,9 +148,9 @@ function text_shortcode( $atts, $content = null ) {
 	), $atts ) );
 
 	// add divs to the content
-	$output = '<div class="text ' . $class . '">';
+	$output = ' < div class="text ' . $class . '" > ';
 	$output .= do_shortcode( $content );
-	$output .= '</div>';
+	$output .= '</div > ';
 
 	return $output;
 }
@@ -363,7 +370,7 @@ function shortcode_content( $atts, $content = null ) {
 
 				$output .= '<div class="inner">';
 
-				$output .= '<a href="' . home_url( '/beratung-services#' ) . $post->post_name . '" title="' . get_the_title( $post->ID ) . '">';
+				$output .= '<a href="' . home_url( '/dienstleistungen#' ) . $post->post_name . '" title="' . get_the_title( $post->ID ) . '">';
 
 				if ( has_post_thumbnail( $post->ID ) ) {
 					$output .= '<figure class="featured-thumbnail" style="background: url(' . $url . ') no-repeat 50% 50%;">';
@@ -549,6 +556,7 @@ function shortcode_content( $atts, $content = null ) {
 
 				$output .= '<' . $item_tag . ' class="item item-' . $i . ' ' . $post_classes . ' ' . $class_item . '"><div class="wrapper">';
 
+				$output .= '<span class="title-text"><strong>' . get_the_title( $post->ID ) . '</strong></span>';
 
 				// Content.
 				$output .= '<div class="content">';

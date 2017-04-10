@@ -116,11 +116,14 @@ hr {
   transition: .3s;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
   text-transform: uppercase;
+  @include break($large) {
+    font-size: 16px;
+    padding: 0 20px;
+  }
   @include break($medium) {
-    font-size: 17px;
   }
   @include break($mobile) {
-    font-size: 16px;
+
   }
   &:hover,
   &:active {

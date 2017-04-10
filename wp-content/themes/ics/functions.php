@@ -133,7 +133,7 @@ include_once PARENT_DIR . '/includes/theme_customizer.php';
 /**
  * Add image slider for header.
  */
-include_once PARENT_DIR . '/includes/image-slider/init.php';
+//include_once PARENT_DIR . '/includes/image-slider/init.php';
 
 /**
  * Add image slider for content.

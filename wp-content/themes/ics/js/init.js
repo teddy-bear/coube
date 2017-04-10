@@ -204,7 +204,7 @@
         wow.init();
 
         // Equal height for blocks.
-        $('.match').matchHeight();
+        $('.match, .news-blocks .inner').matchHeight();
 
         // Scripts for mobile devices.
         if ($(window).width() < 768) {

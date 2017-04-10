@@ -165,7 +165,7 @@
 ------------------------------------------------------------ */
 .news-blocks {
   width: auto;
-  padding: 0 30px 20px;
+  padding: 0 30px 40px;
   margin-bottom: 10px;
   .item {
     padding: 0 25px 25px;
@@ -177,7 +177,7 @@
     .meta {
       font-size: 13px;
       color: #b4b4b4;
-      padding-bottom: 15px;
+      padding-bottom: 12px;
       span {
         margin-right: 10px;
         i {
@@ -218,14 +218,15 @@
     .post-content {
       font-size: 13px;
       color: #888888;
-      padding-bottom: 10px;
+      padding-bottom: 20px;
     }
     .read-more-wrapper {
-      text-align: center;
-      margin-bottom: -30px;
+      position: absolute;
+      left: 50%;
+      bottom: 7px;
+      transform: translateX(-50%);
     }
     .btn {
-      visibility: visible;
     }
   }
   // Prev / next arrows.
@@ -288,7 +289,7 @@
 
 .logo-items {
   width: auto;
-  padding: 0 30px;
+  padding: 0 30px 20px;
   .item {
     text-align: center;
     padding: 0 20px;
@@ -401,7 +402,10 @@
 /* Floating boxes.
 ------------------------------------------------------------ */
 .row-circle {
-  height: 700px;
+  padding-bottom: 170px;
+  img {
+    visibility: visible;
+  }
 }
 
 .floating-box {
@@ -409,17 +413,22 @@
   position: absolute;
   color: #444;
   font-size: 14px;
-  padding: 30px;
+  padding: 20px 15px;
   border-radius: 5px;
   background: #efefef;
   border: 1px solid #cecece;
   width: 250px;
-  &::before {
+  /*&::before {
     content: '';
     background: url("../images/box-decor.png");
     width: 34px;
     height: 19px;
     position: absolute;
+  }*/
+  &:hover {
+    border-color: $orange;
+    box-shadow: 0 0 8px 2px rgba(238, 140, 33, 0.5);
+    background: #e6e6e6;
   }
   p {
     padding: 0;
@@ -431,28 +440,32 @@
     padding-bottom: 7px;
   }
   &.left {
-    top: 0;
-    left: 0;
-    &::before {
+    top: 130px;
+    left: 50%;
+    transform: translateX(-520px);
+    /*&::before {
       bottom: 20px;
-    }
+    }*/
   }
   &.right {
-    top: 0;
-    right: 0;
-    background: url(../images/box-shape-right.png) no-repeat;
-    &::before {
+    top: 90px;
+    left: 50%;
+    transform: translateX(260px);
+    /*&::before {
       bottom: 20px;
       left: -34px;
       transform: rotate(180deg);
-    }
+    }*/
   }
   &.bottom {
     bottom: 0;
-    &::before {
+    width: 330px;
+    left: 50%;
+    transform: translateX(-50%);
+    /*&::before {
       top: -19px;
       right: 34px;
-    }
+    }*/
 
   }
 }
@@ -580,3 +593,64 @@ body div[id*="tab_container"] {
   }
 }
 
+/* Services page.
+------------------------------------------------------------ */
+.services-list {
+  background: url(../images/services-bg.jpg) no-repeat 50% 50% / cover fixed #051121;
+  padding: 50px 0;
+  .item {
+    margin-bottom: 60px;
+    text-align: center;
+    color: #fff;
+    .featured-thumbnail {
+      text-align: center;
+      border: 2px solid $orange;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 20px;
+    }
+    .title-text {
+      margin-bottom: 5px;
+      &::before {
+        border-color: $orange;
+      }
+    }
+    .post-content {
+      .excerpt {
+        font-size: 1.2em;
+        font-style: italic;
+        margin-bottom: 10px;
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/* News page + Taxonomy news category.
+------------------------------------------------------------ */
+.page-news,
+.tax-news_category {
+  .news-categories-filter {
+    text-align: center;
+    padding-bottom: 35px;
+    li {
+      display: inline-block;
+      margin: 0 10px;
+      a {
+        text-decoration: none;
+        color: $blue;
+        font-size: 18px;
+        font-weight: 700;
+        &:hover {
+          text-decoration: underline;
+          color: $orange;
+        }
+      }
+    }
+  }
+  .item {
+    margin-bottom: 30px;
+  }
+}
